@@ -1,0 +1,21 @@
+<div id="header">
+  <ul class="navbar">
+    <li class="nav"><%= link_to (image_tag 'logo'), "/posts/index"%></li>
+    <% if current_page?("/posts/best")%>
+      <li class="nav"><%= link_to '인기 글', "", style: "border-bottom: 3px solid #ac0404", class: "navbtn" %></li>
+    <% else%>
+      <li class="nav"><%= link_to '인기 글', "/posts/best" %></li>
+    <% end %>
+    <% if current_page?("/posts/total")%>
+      <li class="nav"><%= link_to '모든 글', "", style: "border-bottom: 3px solid #ac0404; margin-right: 1rem;", class: "navbtn" %></li>
+    <% else%>
+      <li class="nav"><%= link_to '모든 글', "/posts/total", style: "margin-right: 1rem;" %></li>
+    <% end %>
+    <% if current_page?("/posts/search(/)")%>
+      <li class="nav"><%= link_to '검색', "/posts/search", style: "padding-left: 1rem; padding-right: 1rem; border-bottom: 3px solid #ac0404", class: "navbtn" %></li>
+    <% else%>
+      <li class="nav"><%= link_to '검색', "/posts/search", style: "padding-left: 1rem; padding-right: 1rem;" %></li>
+    <% end %>
+  </ul>
+</div>
+<div class="dam"></div>

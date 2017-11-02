@@ -1,0 +1,7 @@
+<%= link_to 'AJAX', "/posts/#{@url}/1", style: "display: none" , id: "ajax" , remote: true %>
+
+<div class="page-0">
+  <% @posts.each do |post| %>
+    <%= render "post", post: post %>
+  <% end %>
+</div>

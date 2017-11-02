@@ -1,0 +1,18 @@
+<%= form_tag("/posts/search", :method => "post", id: "search-form") do %>
+<div class="search-wrapper">
+  <div class="search-box">
+    <%=text_field_tag :search, nil, placeholder: "키워드를 입력해주세요" %>
+    <%= submit_tag "검색", id: "search-btn" %>
+  </div>
+</div>
+<% end %>
+
+<% if @posts.present? %>
+  <% @posts.each do |post| %>
+    <%= render "psearch", post: post, search: @search %>
+  <% end %>
+<% else %>
+  <div class="search-error">
+    <div class="search-error-text">검색결과가 존재하지 않습니다.</div>
+  </div>
+<% end %>

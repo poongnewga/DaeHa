@@ -1,0 +1,36 @@
+.search-wrapper {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.search-box {
+  padding-left: 5vw;
+  padding-right: 5vw;
+  padding-top: 5vw;
+
+  input {
+    font-size: 1.2rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border: 1px solid #9a9a9a;
+    border-radius: 6px;
+  }
+}
+
+.search-error {
+  width: 100vw;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .search-error-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+}
+
+#search-btn {
+  color: white;
+  background-color: #ac0404;
+}

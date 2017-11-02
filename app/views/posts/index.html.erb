@@ -1,0 +1,68 @@
+<div class="about-container">
+    <div class="first-comment">Dev-Team</div>
+    <div class="pic-container">
+        <div class="about-pic">
+            <%= image_tag "hj" %>
+            <div class="intro">고려대학교</div>
+            <div class="intro">보건정책관리학부</div>
+            <div class="intro">채희재</div>
+        </div>
+        <div class="about-pic">
+            <%= image_tag "ky" %>
+            <div class="intro">고려대학교</div>
+            <div class="intro">통계학과</div>
+            <div class="intro">김강열</div>
+        </div>
+    </div>
+    <div class="pic-container">
+        <div class="about-pic">
+            <%= image_tag "wj" %>
+            <div class="intro">고려대학교</div>
+            <div class="intro">경영학과</div>
+            <div class="intro">안운장</div>
+        </div>
+        <div class="about-pic">
+            <%= image_tag "ty" %>
+            <div class="intro">고려대학교</div>
+            <div class="intro">경제학과</div>
+            <div class="intro">김태엽</div>
+        </div>
+    </div>
+</div>
+
+<div class="about-map">
+    <div class="map-comment">멋쟁이 사자처럼 X 고려대학교</div>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        var uluru = { lat: 37.586885, lng: 127.030713};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 18,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXV1sG17SQ3sVlJF9Hj6XfetupXJ8OtVQ&callback=initMap">
+    </script>
+
+    <div class="map-space"></div>
+
+    <div class="contact-container">
+        <div class="contact-img"><%= image_tag "location" %></div>
+        <div class="contact-info">고려대학교 파이빌 S306</div>
+    </div>
+    <div class="contact-container">
+        <div class="contact-img"><%= image_tag "phone" %></div>
+        <div class="contact-info">010-3375-4005</div>
+    </div>
+    <div class="contact-container">
+        <div class="contact-img"><%= image_tag "email" %></div>
+        <div class="contact-info">heejae@likelion.org</div>
+    </div>
+    <br>
+</div

@@ -1,0 +1,66 @@
+/* about page */
+.about-container {
+
+    .first-comment {
+        text-align: center;
+        font-size: 2rem;
+        padding-top: 5vh;
+    }
+
+    .pic-container {
+        display: flex;
+        justify-content: space-around;
+        padding-top: 5vh;
+        padding-left: 3vw;
+        padding-right: 3vw;
+    }
+        .about-pic img {
+            border-radius: 10px;
+            height: 30vw;
+            width: 30vw;
+        }
+
+        .intro {
+            text-align: center;
+            font-size: 0.9rem;
+        }
+}
+
+.about-map {
+
+    padding-left: 10vw;
+    padding-right: 10vw;
+
+    .map-comment {
+        text-align: center;
+        padding-top: 5vh;
+        padding-bottom: 5vh;
+    }
+
+    .map-space {
+        height: 5vh;
+    }
+
+    #map {
+        width: 80vw;
+        height: 60vh;
+    }
+
+    .contact-container {
+        display: flex;
+        justify-content :space-around;
+    }
+        .contact-img {
+            width: 30%;
+            height: 30px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .contact-info {
+            width: 70%;
+            height: 30px;
+            text-align: center;
+        }
+}

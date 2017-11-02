@@ -1,0 +1,192 @@
+<!-- 업데이트 시간 계산 -->
+<% c_time = post.updated_at.to_i %>
+<% now_time = Time.now.utc.to_i %>
+<% r = now_time - c_time %>
+<% day = r/(24*60*60) %>
+<% r = r%(24*60*60) %>
+<% hour = r/(60*60) %>
+<% r = r%(60*60) %>
+<% minute = r/60 %>
+<% r = r%60 %>
+<% second = r %>
+
+<!-- 가장 많은 리액션 3개 정렬하여 뽑기 -->
+<% a = post.p_likes_count %>
+<% b = post.p_loves_count %>
+<% c = post.p_hahas_count %>
+<% d = post.p_wows_count %>
+<% e = post.p_sads_count %>
+<% f = post.p_angrys_count %>
+
+<% z = [a, b, c, d, e, f] %>
+
+<% def put_image(res, i) %>
+    <% if res == 0 %>
+        <%= image_tag "like", class: "reaction-img reaction-img-#{i}" %>
+    <% elsif res == 1 %>
+        <%= image_tag "love", class: "reaction-img reaction-img-#{i}" %>
+    <% elsif res == 2 %>
+        <%= image_tag "haha", class: "reaction-img reaction-img-#{i}" %>
+    <% elsif res == 3 %>
+        <%= image_tag "wow", class: "reaction-img reaction-img-#{i}" %>
+    <% elsif res == 4 %>
+        <%= image_tag "sad", class: "reaction-img reaction-img-#{i}" %>
+    <% elsif res == 5 %>
+        <%= image_tag "angry", class: "reaction-img reaction-img-#{i}" %>
+    <% end %>
+<% end %>
+
+<% if z.count 0 <= 3 %>
+    <% best = z.each_with_index.sort.reverse.first(3) %>
+    <% best1 = best.first.second %>
+    <% best2 = best.second.second %>
+    <% best3 = best.third.second %>
+    <% ress = [best1, best2, best3] %>
+<% elsif z.count 0 == 4 %>
+    <% best = z.each_with_index.sort.reverse.first(2) %>
+    <% best1 = best.first.second %>
+    <% best2 = best.second.second %>
+    <% ress = [best1, best2] %>
+<% else %>
+    <% best = z.each_with_index.sort.reverse.first(1) %>
+    <% best1 = best.first.second %>
+    <% ress = [best1] %>
+<%e end %>
+
+
+<!-- 1개 포스트 == 1개 카드 -->
+<div class="card">
+  <!-- 본문 -->
+  <div class="writer">
+    <div class="writer-profile">
+      <% if post.p_writer == "고려대학교 대나무숲" %>
+        <%= image_tag 'korea' %>
+      <% elsif post.p_writer == "연세대학교 대나무숲"%>
+        <%= image_tag 'yonsei' %>
+      <% elsif post.p_writer == "서강대학교 대나무숲"%>
+        <%= image_tag 'sogang' %>
+      <% end %>
+      <div class="writer-name"><%= post.p_writer %></div>
+    </div>
+    <div class="fb-link">
+      <div> <%= link_to (image_tag 'fb'), "https://www.facebook.com/#{post.p_id}", target: "_blank"%> </div>
+    </div>
+  </div>
+  <div class="date">
+    <div class="created_t"> 작성일자 : <%= post.p_time.to_s.split(" ").first %> </div>
+    <div class="updated_t">
+      <% if hour >= 1 %>
+          <%=  "#{hour}시간 전 업데이트" %>
+      <% elsif minute >= 1 %>
+          <%= "#{minute}분 전 업데이트"%>
+      <% elsif second >= 1 %>
+          <%=  "#{second}초 전 업데이트"%>
+      <% else %>
+          <%= "업데이트가 필요"%>
+      <% end %>
+    </div>
+  </div>
+  <div id="<%= post.p_id %>" class="message"><%= truncate(post.p_message, length: 400, separator: " ", omission: '... ') { link_to "/posts/readmoreposts/#{post.p_id}", method: "post", remote:true, style: "color: #9fafcc" do "더 보기" end} %></div>
+
+  <!-- 리액션 총합 -->
+  <!-- todoo:: 리액션 클릭 시 세부 내용 출력 -->
+  <div class="reactions-total">
+    <div class="reaction-count">
+      <div class="re-total-imgs">
+        <% ress.each_with_index do |res, i| %>
+          <% put_image(res, i) %>
+        <% end %>
+      </div>
+      <div class="re-total-counts">
+        <%= post.p_reactions_count %> 명이 공감하였습니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- 세부 리액션 -->
+    <div class="reactions reaction-visible">
+    <div class="reaction-container">
+      <div class="reaction-img-container"><%= image_tag 'like', class: "like-img" %></div>
+      <div class="reaction-count"><%= post.p_likes_count %></div>
+    </div>
+    <div class="reaction-container">
+      <div class="reaction-img-container"><%= image_tag 'love', class: "love-img" %></div>
+      <div class="reaction-count"><%= post.p_loves_count %></div>
+    </div>
+    <div class="reaction-container">
+      <div class="reaction-img-container"><%= image_tag 'haha', class: "haha-img" %></div>
+      <div class="reaction-count"><%= post.p_hahas_count %></div>
+    </div>
+    <div class="reaction-container">
+      <div class="reaction-img-container"><%= image_tag 'wow', class: "wow-img" %> </div>
+      <div class="reaction-count"><%= post.p_wows_count %></div>
+    </div>
+    <div class="reaction-container">
+      <div class="reaction-img-container"><%= image_tag 'sad', class: "sad-img" %> </div>
+      <div class="reaction-count"><%= post.p_sads_count %></div>
+    </div>
+    <div class="reaction-container">
+      <div class="reaction-img-container"><%= image_tag 'angry', class: "angry-img"%></div>
+      <div class="reaction-count"><%= post.p_angrys_count %></div>
+    </div>
+  </div>
+
+  <!-- 코멘트 리액션 베스트 3 계산 -->
+  <% c1list = [post.c1_likes_count, post.c1_loves_count, post.c1_hahas_count, post.c1_wows_count, post.c1_sads_count, post.c1_angrys_count] %>
+  <% c2list = [post.c2_likes_count, post.c2_loves_count, post.c2_hahas_count, post.c2_wows_count, post.c2_sads_count, post.c2_angrys_count] %>
+
+  <% if c1list.count 0 <= 3 %>
+      <% c1best = c1list.each_with_index.sort.reverse.first(3) %>
+      <% c1ress = [c1best.first.second, c1best.second.second, c1best.third.second] %>
+  <% elsif c1list.count 0 == 4 %>
+      <% c1best = c1list.each_with_index.sort.reverse.first(2) %>
+      <% c1ress = [c1best.first.second, c1best.second.second] %>
+  <% else %>
+    <% c1best = c1list.each_with_index.sort.reverse.first(1) %>
+    <% c1ress = [c1best.first.second] %>
+  <%e end %>
+
+  <% if c2list.count 0 <= 3 %>
+      <% c2best = c2list.each_with_index.sort.reverse.first(3) %>
+      <% c2ress = [c2best.first.second, c2best.second.second, c2best.third.second] %>
+  <% elsif c2list.count 0 == 4 %>
+      <% c2best = c2list.each_with_index.sort.reverse.first(2) %>
+      <% c2ress = [c2best.first.second, c2best.second.second] %>
+  <% else %>
+    <% c2best = c2list.each_with_index.sort.reverse.first(1) %>
+    <% c2ress = [c2best.first.second] %>
+  <%e end %>
+
+
+  <!-- 코멘트 -->
+  <div class="comments">
+    <div class="comment">
+      <div class="comment-header">
+        <div class="c-name"><%= image_tag "#{post.c1_profile}" %><%= post.c1_name %></div>
+        <div class="c-count">
+          <% c1ress.each_with_index do |res, i| %>
+            <% put_image(res, i) %>
+          <% end %>
+          <%= post.c1_reactions_count %> 명
+        </div>
+      </div>
+      <div id="<%=post.c1_id%>" class="comment-body"><%= truncate(post.c1_message, length: 100, separator: " ", omission: '... ') { link_to "/posts/readmorecommentone/#{post.c1_id}", method: "post", remote:true, style: "color: #9fafcc" do "더 보기" end} %></div>
+    </div>
+    <div class="comment">
+      <div class="comment-header">
+        <div class="c-name">
+          <%= image_tag "#{post.c2_profile}" %>
+          <div><%= post.c2_name %></div>
+        </div>
+        <div class="c-count">
+          <% c1ress.each_with_index do |res, i| %>
+            <% put_image(res, i) %>
+          <% end %>
+          <%= post.c2_reactions_count %> 명
+        </div>
+      </div>
+      <div id="<%=post.c2_id%>" class="comment-body"><%= truncate(post.c2_message, length: 100, separator: " ", omission: '... ') { link_to "/posts/readmorecommenttwo/#{post.c2_id}", method: "post", remote:true, style: "color: #9fafcc" do "더 보기" end} %></div>
+    </div>
+  </div>
+</div>
+<br>
