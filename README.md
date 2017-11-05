@@ -2,7 +2,7 @@
 
 신촌 해커톤 11조 - 고려대팀
 
-![dae-ha](./daeha.png){.aligncenter}
+![dae-ha](./daeha.png) {.aligncenter}
 
 
 대학생들 사이에서 인기있는 익명 게시판 대나무숲!
