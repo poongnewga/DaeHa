@@ -3,7 +3,8 @@
 신촌 해커톤 11조 - 고려대팀
 
 ![dae-ha](./daeha.png)
-[해커톤 발표 자료](https://github.com/poongnewga/Presentation_For_DaeHa)
+
+>> [ 해커톤 발표 자료 ](https://github.com/poongnewga/Presentation_For_DaeHa)
 
 대학생들 사이에서 인기있는 익명 게시판 대나무숲!
 
