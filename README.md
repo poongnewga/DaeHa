@@ -2,7 +2,7 @@
 
 신촌 해커톤 11조 - 고려대팀
 
-![dae-ha](./daeha.png)
+![dae-ha](./daeha_img.png)
 
 >> [ 해커톤 발표 자료 : https://github.com/poongnewga/Presentation_For_DaeHa ](https://github.com/poongnewga/Presentation_For_DaeHa)
 
